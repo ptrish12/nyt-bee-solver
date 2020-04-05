@@ -44,13 +44,21 @@ def is_it_a_word(list_of_perms: list, english_corpus: list):
     return valid_words
 
 
-step_1 = get_perms_from_letters('aerc')
-print(step_1)
-step_3 = is_it_a_word(step_1, word_list)
-print(step_3)
+
+def main():
+    center_letter = str(input("What is the center letter? "))
+    other_letters = str(input("What are the outer letters? "))
+    all_letters = center_letter + other_letters
+    print(f'''Possible words are:
+''', is_it_a_word(get_perms_from_letters(all_letters,center_letter), word_list))
+
+
+if __name__ == "__main__":
+    main()
 
 
 # TODO
-# check for center letter
 # find better corpus
-# add user input
+# make less slow
+# write tests
+
