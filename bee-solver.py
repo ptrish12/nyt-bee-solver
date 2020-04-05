@@ -5,7 +5,7 @@ from nltk.corpus import words
 word_list = set(words.words())
 
 
-def get_perms_from_letters(letters: str, center_letter: str):
+def get_perms_from_letters(letters: str):
     """
     Use itertools cartesian product method to get every possible word from a string of letters.
 
@@ -15,16 +15,17 @@ def get_perms_from_letters(letters: str, center_letter: str):
     word_length = 4  # set minimum word length required
     all_letter_combos = []
     while word_length < 10:
-        first_set = []
         for x in product(letters, repeat=word_length):
-            first_set.append(x)
-        for n in range(0, len(first_set)):
-            all_letter_combos.append(first_set[n])
+            all_letter_combos.append(x)
         word_length += 1
+    return all_letter_combos
+
+
+def must_have_center_letter(all_perms: list, center_letter: str):
     combos_with_center_letter = []
-    for wd in all_letter_combos:
+    for wd in all_perms:
         if center_letter in wd:
-            y=''.join(wd)
+            y = ''.join(wd)
             combos_with_center_letter.append(y)
     return combos_with_center_letter
 
@@ -37,7 +38,7 @@ def is_it_a_word(list_of_perms: list, english_corpus: list):
     :param english_corpus: list of all valid English words
     :return valid_words: list of possible bee answers that are valid in English
     """
-    valid_words =[]
+    valid_words = []
     for word in list_of_perms:
         if word in english_corpus:
             valid_words.append(word)
@@ -50,7 +51,7 @@ def main():
     other_letters = str(input("What are the outer letters? "))
     all_letters = center_letter + other_letters
     print(f'''Possible words are:
-''', is_it_a_word(get_perms_from_letters(all_letters,center_letter), word_list))
+''', is_it_a_word(must_have_center_letter(get_perms_from_letters(all_letters),center_letter), word_list))
 
 
 if __name__ == "__main__":
