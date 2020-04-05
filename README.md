@@ -4,7 +4,7 @@ This is a solver for the NYT spelling bee game!
 
 #### Game Rules
 
-The NYT Spelling Bee game has a set of 7 letters: six arranged 
+Spelling Bee has a set of 7 letters: six arranged 
 in a hexagon around a center letter. The goal is to find all the 
 words you can!
 
