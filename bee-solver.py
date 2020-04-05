@@ -5,7 +5,7 @@ from nltk.corpus import words
 word_list = set(words.words())
 
 
-def get_perms_from_letters(letters: str):
+def get_perms_from_letters(letters: str, center_letter: str):
     """
     Use itertools cartesian product method to get every possible word from a string of letters.
 
@@ -17,12 +17,16 @@ def get_perms_from_letters(letters: str):
     while word_length < 10:
         first_set = []
         for x in product(letters, repeat=word_length):
-            wd = ''.join(x)
-            first_set.append(wd)
+            first_set.append(x)
         for n in range(0, len(first_set)):
             all_letter_combos.append(first_set[n])
         word_length += 1
-    return all_letter_combos
+    combos_with_center_letter = []
+    for wd in all_letter_combos:
+        if center_letter in wd:
+            y=''.join(wd)
+            combos_with_center_letter.append(y)
+    return combos_with_center_letter
 
 
 def is_it_a_word(list_of_perms: list, english_corpus: list):
