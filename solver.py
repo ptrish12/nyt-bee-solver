@@ -12,12 +12,14 @@ def get_perms_from_letters(letters: str):
     :param letters: String of all seven letters in the bee
     :return all_letter_combos: List of strings.
     """
-    word_length = 4  # set minimum word length required
+    word_length = 4  # set min word length required
+    word_length_max = 10  # set max word length to look for
     all_letter_combos = []
-    while word_length < 10:
+    while word_length < word_length_max:
         for x in product(letters, repeat=word_length):
             all_letter_combos.append(x)
         word_length += 1
+    all_letter_combos = set(all_letter_combos)  # remove duplicates so it can handle double letters
     return all_letter_combos
 
 
@@ -43,7 +45,6 @@ def is_it_a_word(list_of_perms: list, english_corpus: list):
         if word in english_corpus:
             valid_words.append(word)
     return valid_words
-
 
 
 def main():
